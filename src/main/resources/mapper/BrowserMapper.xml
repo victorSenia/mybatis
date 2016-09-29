@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leo.test.mybatis.mapper.BrowserMapper">
+    <resultMap type='com.leo.test.mybatis.model.Browser' id='Browser'>
+        <id property='id' column='id'/>
+        <result property='browser' column='browser'/>
+        <result property='cssGrade' column='css_grade'/>
+        <result property='engine' column='engine'/>
+        <result property='engineVersion' column='engine_version'/>
+        <result property='platform' column='platform'/>
+    </resultMap>
+
+
+    <select id="list" resultMap="Browser">
+        select * from browser
+    </select>
+
+    <select id="get" resultMap="Browser">
+        select * from browser where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.leo.test.mybatis.model.Browser">
+DELETE FROM `browser` WHERE id = #{id}
+    </delete>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT `browser` SET `browser`=#{browser}, `css_grade`=#{cssGrade}, `engine`=#{engine},
+        `engine_version`=#{engineVersion}, `platform`=#{platform}
+        <!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">-->
+        <!--SELECT LAST_INSERT_ID() as id-->
+        <!--</selectKey>-->
+    </insert>
+
+    <update id="edit">
+        UPDATE `browser` SET `browser`=#{browser}, `css_grade`=#{cssGrade}, `engine`=#{engine},
+        `engine_version`=#{engineVersion}, `platform`=#{platform} WHERE id=#{id}
+    </update>
+</mapper>
